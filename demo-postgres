@@ -1,0 +1,4 @@
+FROM postgres:12
+COPY initdb.sql /
+EXPOSE 5432
+CMD ["/bin/sh"]

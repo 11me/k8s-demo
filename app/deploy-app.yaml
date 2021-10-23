@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: 11me/demo-app:v1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PG_HOST
+          value: postgres
+        - name: VERSION
+          value: 'v1'
+        - name: PG_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-password
+              key: pg_password
